@@ -28,12 +28,18 @@ console.log(processFirstItem(['foo','bar'],function(str){return str+str}));
   Study the code for counter1 and counter2, then answer the questions below.
   
   1. What is the difference between counter1 and counter2?
+
+    counter1 is a nested funtion.
   
   2. Which of the two uses a closure? How can you tell?
+
+     counter1 because it reaches into the parent function for the count variable. 
   
   3. In what scenario would the counter1 code be preferable? In what scenario would 
      counter2 be better?  
-*/
+
+     counter1 is preferable in most cases. counter2 is preferable when the count variable must be accessed globablly.
+*/  
 
 // counter1 code
 function counterMaker() {
@@ -62,8 +68,8 @@ Use the inning function below to do the following:
 NOTE: This will be a callback function for the tasks below
 */
 
-function inning(/*Code Here*/){
-    /*Code Here*/
+function inning(){
+    return Math.floor(Math.random() * 3);
 }
 
 
@@ -81,8 +87,19 @@ Use the finalScore function below to do the following:
 }
 */ 
 
-function finalScore(/*code Here*/){
-  /*Code Here*/
+function finalScore(inningcb, num){
+
+  const totalScore = {
+    Home: 0,
+    Away: 0
+  }
+
+  for (let i = 1; i <= num; i++) {
+    totalScore.Home = totalScore.Home + inningcb();
+    totalScore.Away = totalScore.Away + inningcb();
+  }
+  
+  return totalScore;
 }
 
 /* ⚾️⚾️⚾️ Task 4: getInningScore() ⚾️⚾️⚾️
@@ -90,8 +107,14 @@ Use the getInningScore() function below to do the following:
   1. Receive a callback function - you will pass in the inning function from task 2 as your argument 
   2. Return an object with a score for home and a score for away that populates from invoking the inning callback function */
 
-function getInningScore(/*Your Code Here */) {
-  /*Your Code Here */
+function getInningScore(inningcb) {
+
+  const inningScore = {
+    Home: inningcb(),
+    Away: inningcb()
+  }
+  
+  return inningScore;
 }
 
 
